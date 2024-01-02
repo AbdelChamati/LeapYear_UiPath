@@ -69,7 +69,7 @@
       <AssemblyReference>UiPath.System.Activities.ViewModels</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Flowchart sap2010:Annotation.AnnotationText="Flowchart to check if the year is a leap year or not" DisplayName="LeapYear_Flowchart" sap:VirtualizedContainerService.HintSize="634,668" sap2010:WorkflowViewState.IdRef="Flowchart_1">
+  <Flowchart sap2010:Annotation.AnnotationText="Flowchart to check if the year is a leap year or not&#xD;&#xA;&#xD;&#xA;Extra: DoWhile Loop (Arrow from False to Input Year)" DisplayName="LeapYear_Flowchart" sap:VirtualizedContainerService.HintSize="634,694" sap2010:WorkflowViewState.IdRef="Flowchart_1">
     <Flowchart.Variables>
       <Variable x:TypeArguments="x:Int32" Name="int_Year" />
     </Flowchart.Variables>
@@ -83,9 +83,9 @@
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
     <Flowchart.StartNode>
-      <x:Reference>__ReferenceID3</x:Reference>
+      <x:Reference>__ReferenceID0</x:Reference>
     </Flowchart.StartNode>
-    <FlowStep x:Name="__ReferenceID3">
+    <FlowStep x:Name="__ReferenceID0">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <av:Point x:Key="ShapeLocation">200,127.5</av:Point>
@@ -104,10 +104,7 @@
         </sap:WorkflowViewStateService.ViewState>
       </ui:InputDialog>
       <FlowStep.Next>
-        <FlowDecision x:Name="__ReferenceID0" DisplayName="Flow Decision" sap:VirtualizedContainerService.HintSize="79,87" sap2010:WorkflowViewState.IdRef="FlowDecision_1">
-          <FlowDecision.Condition>
-            <VisualBasicValue x:TypeArguments="x:Boolean" DisplayName="Visual basic value" ExpressionText="((int_Year Mod 4 = 0) and int_Year Mod 100 &lt;&gt;0) Or (int_Year Mod 400 = 0)" />
-          </FlowDecision.Condition>
+        <FlowDecision x:Name="__ReferenceID1" Condition="[((int_Year Mod 4 = 0) and int_Year Mod 100 &lt;&gt;0) Or (int_Year Mod 400 = 0)]" DisplayName="Flow Decision" sap:VirtualizedContainerService.HintSize="79,87" sap2010:WorkflowViewState.IdRef="FlowDecision_1">
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -118,7 +115,7 @@
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
           <FlowDecision.True>
-            <FlowStep x:Name="__ReferenceID1">
+            <FlowStep x:Name="__ReferenceID2">
               <sap:WorkflowViewStateService.ViewState>
                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
                   <av:Point x:Key="ShapeLocation">30,354</av:Point>
@@ -129,21 +126,25 @@
             </FlowStep>
           </FlowDecision.True>
           <FlowDecision.False>
-            <FlowStep x:Name="__ReferenceID2">
+            <FlowStep x:Name="__ReferenceID3">
               <sap:WorkflowViewStateService.ViewState>
                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
                   <av:Point x:Key="ShapeLocation">350,354</av:Point>
                   <av:Size x:Key="ShapeSize">200,52</av:Size>
+                  <av:PointCollection x:Key="ConnectorLocation">550,380 580,380 580,153.5 400,153.5</av:PointCollection>
                 </scg:Dictionary>
               </sap:WorkflowViewStateService.ViewState>
               <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" AutoCloseAfter="00:00:00" DisplayName="Message Box | False" sap:VirtualizedContainerService.HintSize="200,52" sap2010:WorkflowViewState.IdRef="MessageBox_2" Text="[&quot;This Year is not a leap year&quot;]" />
+              <FlowStep.Next>
+                <x:Reference>__ReferenceID0</x:Reference>
+              </FlowStep.Next>
             </FlowStep>
           </FlowDecision.False>
         </FlowDecision>
       </FlowStep.Next>
     </FlowStep>
-    <x:Reference>__ReferenceID0</x:Reference>
     <x:Reference>__ReferenceID1</x:Reference>
     <x:Reference>__ReferenceID2</x:Reference>
+    <x:Reference>__ReferenceID3</x:Reference>
   </Flowchart>
 </Activity>

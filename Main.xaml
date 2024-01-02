@@ -1,4 +1,4 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="Main" VisualBasic.Settings="{x:Null}" sap:VirtualizedContainerService.HintSize="1838,1179" sap2010:WorkflowViewState.IdRef="ActivityBuilder_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="Main" VisualBasic.Settings="{x:Null}" sap:VirtualizedContainerService.HintSize="1838,1241" sap2010:WorkflowViewState.IdRef="ActivityBuilder_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
       <x:String>System.Activities</x:String>
@@ -70,9 +70,15 @@
       <AssemblyReference>System.Private.Uri</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap2010:Annotation.AnnotationText="A  Year is a Leap year if it meets the following condiitons:&#xD;&#xA;- The Year is evenly divisible by four&#xD;&#xA;- If the year is evenly divisible by 100, it is not a leap year inless the year is also evenly divisible by 400." DisplayName="Main - IfElseStatment | Leap Year" sap:VirtualizedContainerService.HintSize="472,990" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence sap2010:Annotation.AnnotationText="A  Year is a Leap year if it meets the following condiitons:&#xA;- The Year is evenly divisible by four&#xA;- If the year is evenly divisible by 100, it is not a leap year inless the year is also evenly divisible by 400." DisplayName="Main - IfElseStatment | Leap Year" sap:VirtualizedContainerService.HintSize="572,1176" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:Int32" Name="int_Year" />
+      <Variable x:TypeArguments="x:Boolean" Name="bool_IsLeapYear" />
+      <Variable x:TypeArguments="x:Int32" Name="int_MaxIterations">
+        <Variable.Default>
+          <Literal x:TypeArguments="x:Int32" Value="2" />
+        </Variable.Default>
+      </Variable>
     </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -80,32 +86,71 @@
         <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:InputDialog Options="{x:Null}" OptionsString="{x:Null}" DisplayName="Input Year" sap:VirtualizedContainerService.HintSize="410,239" sap2010:WorkflowViewState.IdRef="InputDialog_1" IsPassword="False" Label="Please Enter a Year" Title="Year Dialog">
-      <ui:InputDialog.Result>
-        <OutArgument x:TypeArguments="x:Int32">[int_Year]</OutArgument>
-      </ui:InputDialog.Result>
-    </ui:InputDialog>
-    <If Condition="[((int_Year Mod 4 = 0) and int_Year Mod 100 &lt;&gt;0) Or (int_Year Mod 400 = 0)]" DisplayName="If statment for checking Leap Year" sap:VirtualizedContainerService.HintSize="410,528" sap2010:WorkflowViewState.IdRef="If_1">
-      <If.Then>
-        <Sequence sap:VirtualizedContainerService.HintSize="376,173" sap2010:WorkflowViewState.IdRef="Sequence_2">
+    <ui:InterruptibleDoWhile CurrentIndex="{x:Null}" sap2010:Annotation.AnnotationText="Execute a specific part of the automation while the condition is meet.&#xD;&#xA;When the specific condition is no longer met, the project exit the loop." DisplayName="Do While" sap:VirtualizedContainerService.HintSize="510,1008" sap2010:WorkflowViewState.IdRef="InterruptibleDoWhile_1" MaxIterations="[int_MaxIterations]">
+      <ui:InterruptibleDoWhile.Body>
+        <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="476,830" sap2010:WorkflowViewState.IdRef="Sequence_4">
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
-          <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" AutoCloseAfter="00:00:00" DisplayName="Message Box | True" sap:VirtualizedContainerService.HintSize="334,85" sap2010:WorkflowViewState.IdRef="MessageBox_1" Text="[&quot;This year is a leap year&quot;]" />
+          <ui:InputDialog Options="{x:Null}" OptionsString="{x:Null}" DisplayName="Input Year" sap:VirtualizedContainerService.HintSize="434,52" sap2010:WorkflowViewState.IdRef="InputDialog_1" IsPassword="False" Label="Please Enter a Year" Title="Year Dialog">
+            <ui:InputDialog.Result>
+              <OutArgument x:TypeArguments="x:Int32">[int_Year]</OutArgument>
+            </ui:InputDialog.Result>
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+          </ui:InputDialog>
+          <Assign sap:VirtualizedContainerService.HintSize="434,82" sap2010:WorkflowViewState.IdRef="Assign_1">
+            <Assign.To>
+              <OutArgument x:TypeArguments="x:Boolean">[bool_IsLeapYear]</OutArgument>
+            </Assign.To>
+            <Assign.Value>
+              <InArgument x:TypeArguments="x:Boolean">[((int_Year Mod 4 = 0) and int_Year Mod 100 &lt;&gt;0) Or (int_Year Mod 400 = 0)]</InArgument>
+            </Assign.Value>
+          </Assign>
+          <If Condition="[bool_IsLeapYear]" DisplayName="If statment for checking Leap Year" sap:VirtualizedContainerService.HintSize="434,528" sap2010:WorkflowViewState.IdRef="If_1">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <If.Then>
+              <Sequence sap:VirtualizedContainerService.HintSize="376,173" sap2010:WorkflowViewState.IdRef="Sequence_2">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+                <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" AutoCloseAfter="00:00:00" DisplayName="Message Box | True" sap:VirtualizedContainerService.HintSize="334,85" sap2010:WorkflowViewState.IdRef="MessageBox_1" Text="[&quot;This year is a leap year&quot;]" />
+              </Sequence>
+            </If.Then>
+            <If.Else>
+              <Sequence sap:VirtualizedContainerService.HintSize="376,173" sap2010:WorkflowViewState.IdRef="Sequence_3">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+                <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" AutoCloseAfter="00:00:00" DisplayName="Message Box | False" sap:VirtualizedContainerService.HintSize="334,85" sap2010:WorkflowViewState.IdRef="MessageBox_2" Text="[&quot;This Year is not a leap year&quot;]" />
+              </Sequence>
+            </If.Else>
+          </If>
         </Sequence>
-      </If.Then>
-      <If.Else>
-        <Sequence sap:VirtualizedContainerService.HintSize="376,173" sap2010:WorkflowViewState.IdRef="Sequence_3">
-          <sap:WorkflowViewStateService.ViewState>
-            <scg:Dictionary x:TypeArguments="x:String, x:Object">
-              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-            </scg:Dictionary>
-          </sap:WorkflowViewStateService.ViewState>
-          <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" AutoCloseAfter="00:00:00" DisplayName="Message Box | False" sap:VirtualizedContainerService.HintSize="334,85" sap2010:WorkflowViewState.IdRef="MessageBox_2" Text="[&quot;This Year is not a leap year&quot;]" />
-        </Sequence>
-      </If.Else>
-    </If>
+      </ui:InterruptibleDoWhile.Body>
+      <ui:InterruptibleDoWhile.Condition>
+        <VisualBasicValue x:TypeArguments="x:Boolean" DisplayName="Visual basic value" ExpressionText="Not bool_IsLeapYear" />
+      </ui:InterruptibleDoWhile.Condition>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:InterruptibleDoWhile>
   </Sequence>
 </Activity>
